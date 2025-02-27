@@ -11,13 +11,13 @@ import Products from "./Products";
 
 const Home = () => {
   return (
-    <div className="container mx-auto">
+    <div className="lg:container mx-auto">
       <Hero />
       <WhyChooseUs />
       <Counter />
       <About />
       <MeetTheTeam />
-      <Products/>
+      <Products />
       {/* <Services /> */}
       <Contact />
       {/* <Footer /> */}
