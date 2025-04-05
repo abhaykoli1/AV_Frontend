@@ -10,7 +10,7 @@ function Footer() {
       title: "Links",
       links: [
         { name: "About Us", to: "/#About" },
-        { name: "Contact Us", to: "/contact" },
+        { name: "Contact Us", to: "/contact-us" },
         { name: "FAQs", to: "/faq" },
       ],
     },
