@@ -5,24 +5,22 @@ import axios from "axios";
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    countryCode: "+91",
-    phone: "",
+    lastName: "",
+    firstName: "",
     email: "",
+    phone: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,19 +28,18 @@ function Contact() {
       const response = await axios.post(
         `${config.API_BASE_URL}/add-AvContact-query`,
         {
-          name: formData.name,
+          name: `${formData.firstName} ${formData.lastName}`,
           phone: formData.phone,
-          country_code: formData.countryCode,
           email: formData.email,
           message: formData.message,
         }
       );
-      alert("Your Contact Query Added");
+      alert("Your Contact Query Added!");
       setFormData({
-        name: "",
-        countryCode: "+91",
-        phone: "",
+        lastName: "",
+        firstName: "",
         email: "",
+        phone: "",
         message: "",
       });
     } catch (error) {
@@ -61,103 +58,124 @@ function Contact() {
     },
   };
 
-  //
   return (
-    <div id="Contact" className="container mx-auto py-8 text-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <motion.div
-          className="px-5 py-3 rounded shadow-lg text-gray-300"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={fadeIn}
-        >
-          <h2 className="text-3xl font-bold text-pink-600 mb-4">
-            Book a <span className="text-gray-400">coffee</span> for Us
-          </h2>
-          <p className="text-lg mb-6">
-            Reach out to our team for any queries or assistance with our IT
-            services.
-          </p>
-          <p className="mb-2">
-            <strong>Office Address:</strong> Manbagh Jaisinghpura Khor, Jaipur,
-            Rajasthan 302027
-          </p>
-          <p className="mb-2">
-            <strong>Email:</strong> info@avbigbuddy.site
-          </p>
-          <p className="mb-2">
-            <strong>Phone:</strong> +91 9509961818
-          </p>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={fadeIn}
-        >
-          <form
-            onSubmit={handleSubmit}
-            className="border-[.5px] border-gray-500 p-5 mx-5 rounded-md shadow-lg text-white"
+    <div
+      id="Contact"
+      className="pb-10 pt-4 text-white flex items-center justify-center"
+    >
+      <div className="container mx-auto px-5">
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Left Side */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="flex flex-col justify-center"
           >
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Name"
-              type="text"
-              className="w-full p-2 mb-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
-              required
-            />
-            <div className="flex items-center mb-4">
-              <select
-                name="countryCode"
-                value={formData.countryCode}
+            <h2 className="text-4xl font-bold mb-4">
+              Book a <span className="text-purple-400">coffee</span> for Us
+            </h2>
+            <p className="text-lg mb-6">
+              Reach out to our team for any queries or assistance with our IT
+              services.
+            </p>
+            <div className="space-y-3 text-gray-300 text-base">
+              <p>
+                <strong className="text-white">Office Address:</strong> Manbagh
+                Jaisinghpura Khor, Jaipur, Rajasthan 302027
+              </p>
+              <p>
+                <strong className="text-white">Email:</strong>{" "}
+                info@avbigbuddy.site
+              </p>
+              <p>
+                <strong className="text-white">Phone:</strong> +91 9509961818
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right Side */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <h2 className="text-3xl font-bold mb-2">
+              Let's connect constellations
+            </h2>
+            <p className="text-gray-400 mb-6">
+              Let's align our constellations! Reach out and let the magic of
+              collaboration illuminate our skies.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex gap-4">
+                <input
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                  type="text"
+                  className="flex-1 p-3 rounded-full bg-transparent border border-gray-600 placeholder-gray-400 outline-none"
+                  required
+                />
+                <input
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  type="text"
+                  className="flex-1 p-3 rounded-full bg-transparent border border-gray-600 placeholder-gray-400 outline-none"
+                  required
+                />
+              </div>
+              <input
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                className="p-2 mr-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
-              >
-                <option value="+91">+91 (India)</option>
-                <option value="+1">+1 (US)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+61">+61 (Australia)</option>
-              </select>
+                type="email"
+                placeholder="Email"
+                className="w-full p-3 rounded-full bg-transparent border border-gray-600 placeholder-gray-400 outline-none"
+                required
+              />
               <input
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 type="text"
                 placeholder="Phone Number"
-                className="w-full p-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
+                className="w-full p-3 rounded-full bg-transparent border border-gray-600 placeholder-gray-400 outline-none"
                 required
               />
-            </div>
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              type="email"
-              placeholder="Email"
-              className="w-full p-2 mb-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
-              required
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Message"
-              className="w-full p-2 mb-4 rounded text-white outline-none bg-transparent border-b-[.5px] border-gray-500"
-              required
-            ></textarea>
-            <motion.button
-              type="submit"
-              className="w-full border-none rounded bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              Submit
-            </motion.button>
-          </form>
-        </motion.div>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Message"
+                className="w-full p-3 h-32 rounded-[30px] bg-transparent border border-gray-600 placeholder-gray-400 outline-none resize-none"
+                required
+              ></textarea>
+
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                disabled={loading}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:opacity-90 transition-all font-semibold"
+              >
+                {loading ? (
+                  "Submitting..."
+                ) : (
+                  <div className="flex items-center justify-center gap-2">
+                    Submit <span>🚀</span>
+                  </div>
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

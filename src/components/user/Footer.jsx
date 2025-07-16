@@ -1,15 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import whatsapp from "../../assets/image/crm.png";
-import logo from "../../assets/image/av.png";
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import logo from "../../assets/image/av.png";
 
 function Footer() {
   const footerLinks = [
     {
       title: "Links",
       links: [
-        { name: "About Us", to: "/#About" },
+        { name: "About us", to: "/#About" },
         { name: "Contact Us", to: "/contact-us" },
         { name: "FAQs", to: "/faq" },
       ],
@@ -17,69 +16,79 @@ function Footer() {
     {
       title: "Company",
       links: [
+        { name: "Terms & Conditions", to: "/" },
         { name: "Privacy Policy", to: "/privacy&policy" },
-        { name: "Terms of Service", to: "/" },
       ],
     },
   ];
 
   return (
-    <footer className="border-t-[0.5px] border-gray-600 text-white pt-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className=" w-96 text-cent">
-            <img src={logo} className="h-40 w-40" />
-            {/* <h1 className="-mt-7 ">AV BIG BUDDY</h1> */}
-          </div>
+    <footer className="bg-[#0A0219] text-white pt-12 relative overflow-hidden">
+      <div className="absolute left-20 z-10 -bottom-20 w-96 h-96 bg-gradient-to-br from-[#031433] to-[#000A1D] rounded-full -translate-x-1/2"></div>
+      <div className="absolute right-0 top-0 w-80 h-80 bg-gradient-to-br from-[#031433] to-[#000A1D] rounded-full  translate-x-1/2"></div>
+
+      <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8 items-start">
+        {/* Left side logo */}
+        <div className="flex flex-col z-20 items-start">
+          <img
+            src={logo}
+            alt="AV BigBuddy"
+            className="h-20 w-20 object-contain"
+          />
+        </div>
+
+        {/* Links and Company */}
+        <div className="grid grid-cols-2 gap-10">
           {footerLinks.map((section, index) => (
             <div key={index}>
-              <h3 className="text-xl font-semibold mb-4">{section.title}</h3>
-              <ul>
+              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
+              <ul className="space-y-3">
                 {section.links.map((link, idx) => (
                   <li key={idx}>
-                    <a
-                      href={link.to}
-                      className="text-gray-400 hover:text-pink-500 duration-500"
+                    <Link
+                      to={link.to}
+                      className="text-purple-400 hover:text-pink-500 transition-all"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-      </div>
-      <a
-        target="_black"
-        href={
-          "http://api.whatsapp.com/send/?phone=9509961818&text&type=phone_number&app_absent=0"
-        }
-        className="flex justify-center items-center lg:h-16 lg:w-16 md:h-14 md:w-14 h-12 w-12 fixed right-5 bottom-5  rounded-md z-50 cursor-pointer"
-      >
-        <img src={whatsapp} />
-      </a>
 
-      <div className="bg-pink-600 w-full flex flex-col items-center  gap-5 py-7 mt-8  text-white text-sm">
-        <p>
-          &copy; {new Date().getFullYear()} AV BigBuddy. All Rights Reserved.
-        </p>
-        {/* <div className="flex flex-col items-center"> */}
-        {/* <p className="flex gap-5 items-center mx-auto  w-full "> */}
-        {/* <a
-              className="hover:text-white hover:scale-105"
-              href="https://www.instagram.com/avbigbuddy/"
+        {/* Social media */}
+        <div className="flex flex-col gap-4">
+          <h3 className="text-lg font-semibold mb-4">Connect with Us</h3>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              className="bg-white text-black rounded-full p-2 hover:scale-110 transition"
             >
-              <Instagram />
-            </a> */}
-        {/* <a className="hover:text-white hover:scale-105" href="">
-              <Twitter />
-            </a>{" "}
-            <a className="hover:text-white hover:scale-105" href="">
-              <Facebook />
-            </a> */}
-        {/* </p> */}
-        {/* </div> */}
+              <Facebook size={20} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              className="bg-white text-black rounded-full p-2 hover:scale-110 transition"
+            >
+              <Twitter size={20} />
+            </a>
+            <a
+              href="https://instagram.com/avbigbuddy/"
+              target="_blank"
+              className="bg-white text-black rounded-full p-2 hover:scale-110 transition"
+            >
+              <Instagram size={20} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-12 text-center text-gray-400 text-sm py-8">
+        &copy; {new Date().getFullYear()} AV BigBuddy. All rights reserved.
       </div>
     </footer>
   );

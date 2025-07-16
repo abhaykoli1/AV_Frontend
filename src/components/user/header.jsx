@@ -11,7 +11,7 @@ const Header = ({ sidebar, toggleSidebar }) => {
   }
   const navigate = useNavigate();
   return (
-    <nav className="flex justify-between items-center py-3 px-7 bg-[rgba(0,0,0,0.93)] shadow-md">
+    <nav className="flex justify-between items-center py-3 px-7 bg-[rgba(0,0,0,0.93) bg-[rgba(12,4,23,0.86)] shadow-md">
       <div className="font-bold text-white">
         <img src={logo} alt="logo" className="h-16" />
       </div>

@@ -8,11 +8,13 @@ import WhyChooseUs from "./whyChooseUS";
 import About from "./About";
 import MeetTheTeam from "./team";
 import Products from "./Products";
+import AboutSection from "./aboutSection";
 
 const Home = () => {
   return (
     <div className="lg:container mx-auto">
       <Hero />
+      <AboutSection />
       <WhyChooseUs />
       <Counter />
       <About />
